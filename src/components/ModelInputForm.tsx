@@ -60,82 +60,85 @@ export default function ModelInputForm({ onSubmit }: Props) {
   }
 
   return (
-    <Card className="w-full max-w-2xl mx-auto p-6 mt-10 bg-white shadow-md">
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <Label htmlFor="modelName">Model Name</Label>
-            <Input
-              id="modelName"
-              placeholder="e.g. Post"
-              value={modelName}
-              onChange={(e) => setModelName(e.target.value)}
-              required
-            />
-          </div>
+  <Card className="w-full max-w-4xl mx-auto p-6 mt-10 bg-white shadow-md">
+    <CardContent>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div>
+          <Label htmlFor="modelName">Model Name</Label>
+          <Input
+            id="modelName"
+            placeholder="e.g. Post"
+            value={modelName}
+            onChange={(e) => setModelName(e.target.value)}
+            required
+          />
+        </div>
 
-          <div>
-            <Label htmlFor="primaryKey">Primary Key</Label>
-            <Input
-              id="primaryKey"
-              placeholder="e.g. id, uuid"
-              value={primaryKey}
-              onChange={(e) => setPrimaryKey(e.target.value)}
-            />
-          </div>
+        <div>
+          <Label htmlFor="primaryKey">Primary Key</Label>
+          <Input
+            id="primaryKey"
+            placeholder="e.g. id, uuid"
+            value={primaryKey}
+            onChange={(e) => setPrimaryKey(e.target.value)}
+          />
+        </div>
 
-          <div>
-            <Label>Fields</Label>
-            <div className="space-y-4 mt-2">
-              {fields.map((field, index) => (
-                <div key={index} className="flex gap-2 items-center">
-                  <Input
-                    className="flex-1"
-                    placeholder="Field name"
-                    value={field.name}
-                    onChange={(e) =>
-                      handleFieldChange(index, "name", e.target.value)
-                    }
-                  />
-                  <Select
-                    value={field.type}
-                    onValueChange={(value) =>
-                      handleFieldChange(index, "type", value)
-                    }
-                  >
-                    <SelectTrigger className="w-[140px]">
-                      <SelectValue placeholder="Type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="string">string</SelectItem>
-                      <SelectItem value="text">text</SelectItem>
-                      <SelectItem value="integer">integer</SelectItem>
-                      <SelectItem value="boolean">boolean</SelectItem>
-                      <SelectItem value="float">float</SelectItem>
-                      <SelectItem value="date">date</SelectItem>
-                      <SelectItem value="datetime">datetime</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <Button
-                    variant="destructive"
-                    type="button"
-                    onClick={() => removeField(index)}
-                  >
-                    Remove
-                  </Button>
-                </div>
-              ))}
-            </div>
-            <Button type="button" className="mt-4" onClick={addField}>
-              Add Field
-            </Button>
+        <div>
+          <Label>Fields</Label>
+          <div className="space-y-4 mt-2">
+            {fields.map((field, index) => (
+              <div
+                key={index}
+                className="flex flex-col sm:flex-row sm:items-center gap-2"
+              >
+                <Input
+                  className="w-full sm:flex-1"
+                  placeholder="Field name"
+                  value={field.name}
+                  onChange={(e) =>
+                    handleFieldChange(index, "name", e.target.value)
+                  }
+                />
+                <Select
+                  value={field.type}
+                  onValueChange={(value) =>
+                    handleFieldChange(index, "type", value)
+                  }
+                >
+                  <SelectTrigger className="w-full sm:w-[140px]">
+                    <SelectValue placeholder="Type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="string">string</SelectItem>
+                    <SelectItem value="text">text</SelectItem>
+                    <SelectItem value="integer">integer</SelectItem>
+                    <SelectItem value="boolean">boolean</SelectItem>
+                    <SelectItem value="float">float</SelectItem>
+                    <SelectItem value="date">date</SelectItem>
+                    <SelectItem value="datetime">datetime</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Button
+                  variant="destructive"
+                  type="button"
+                  className="w-full sm:w-auto"
+                  onClick={() => removeField(index)}
+                >
+                  Remove
+                </Button>
+              </div>
+            ))}
           </div>
-
-          <Button type="submit" className="w-full">
-            Generate Laravel CRUD
+          <Button type="button" className="mt-4" onClick={addField}>
+            Add Field
           </Button>
-        </form>
-      </CardContent>
-    </Card>
-  )
-}
+        </div>
+
+        <Button type="submit" className="w-full">
+          Generate Laravel CRUD
+        </Button>
+      </form>
+    </CardContent>
+  </Card>
+)
