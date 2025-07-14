@@ -130,12 +130,12 @@ export default function ModelInputForm({ onSubmit }: Props) {
               </div>
             ))}
           </div>
-          <Button type="button" className="mt-4" onClick={addField}>
+          <Button type="button" className="mt-4 text-sm py-2" onClick={addField}>
             Add Field
           </Button>
         </div>
 
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full text-sm py-2">
           Generate Laravel CRUD
         </Button>
       </form>
