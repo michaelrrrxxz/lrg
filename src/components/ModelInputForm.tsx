@@ -32,7 +32,6 @@ export default function ModelInputForm({ onSubmit }: Props) {
   const [modelName, setModelName] = useState("")
   const [primaryKey, setPrimaryKey] = useState("id")
   const [fields, setFields] = useState<Field[]>([{ name: "", type: "string" }])
-  const [generatedCode, setGeneratedCode] = useState("")
 
   const handleFieldChange = (index: number, key: keyof Field, value: string) => {
     const updated = [...fields]
@@ -54,7 +53,6 @@ export default function ModelInputForm({ onSubmit }: Props) {
 
     const cleanedFields = fields.filter((f) => f.name.trim() !== "")
     const code = generateModelCode(modelName, cleanedFields)
-    setGeneratedCode(code)
 
     if (onSubmit) {
       onSubmit({ modelName, primaryKey, fields: cleanedFields, generatedCode: code })
