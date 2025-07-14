@@ -142,3 +142,4 @@ export default function ModelInputForm({ onSubmit }: Props) {
     </CardContent>
   </Card>
 )
+}
