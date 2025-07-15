@@ -21,11 +21,11 @@ function getFieldMigrationLine(field: Field): string {
 // Final generator
 export default function generateMigration(modelName: string, fields: Field[]) {
   const tableName = toSnakePlural(modelName)
-  const className =
-    "Create" +
-    tableName.charAt(0).toUpperCase() +
-    tableName.slice(1) +
-    "Table"
+//   const className =
+//     "Create" +
+//     tableName.charAt(0).toUpperCase() +
+//     tableName.slice(1) +
+//     "Table"
 
   const fieldLines = fields.map(getFieldMigrationLine).join("\n            ")
 
