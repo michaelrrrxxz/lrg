@@ -36,6 +36,7 @@ export default function CrudGeneratorPage() {
   toast.error("Model name is required")
   return
 }
+ toast.success("Code generated successfully!")
     const cleanFields = fields.filter((f) => f.name.trim() !== "")
     setModelCode(generateModel(modelName, cleanFields))
     setMigrationCode(generateMigration(modelName, cleanFields))
