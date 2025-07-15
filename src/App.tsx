@@ -15,7 +15,7 @@ function App() {
 
    
       <Toaster
-        position="bottom-right"
+        position="top-right"
         theme="light" // "light" makes it black on white by default
         closeButton
         toastOptions={{
