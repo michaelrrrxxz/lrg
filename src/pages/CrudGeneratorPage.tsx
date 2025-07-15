@@ -13,6 +13,8 @@ import generateBlade from "../utils/generators/generateBlade"
 import generateRoutes from "../utils/generators/routes/web"
 import generateApiRoutes from "../utils/generators/routes/api"
 import generateMigration from "../utils/generators/migration"
+import generateBashApi from "../utils/generators/bashApi"
+import generateBash from "@/utils/generators/bash"
 import { toast } from "sonner"
 
 export default function CrudGeneratorPage() {
@@ -24,6 +26,7 @@ export default function CrudGeneratorPage() {
   const [controllerCode, setControllerCode] = useState("")
   const [routesCode, setRoutesCode] = useState("")
   const [migrationCode, setMigrationCode] = useState("")
+  const [bashCode, setBashCode] = useState("")
 
   const handleChange = (i: number, key: keyof Field, val: string) => {
     const updated = [...fields]
@@ -57,9 +60,11 @@ export default function CrudGeneratorPage() {
         case "inertia":
         case "blade":
          setRoutesCode(generateRoutes(modelName))
+         setBashCode(generateBash(modelName))
         break
       case "api":
          setRoutesCode(generateApiRoutes(modelName))
+          setBashCode(generateBashApi(modelName))
         break
      
     }
@@ -109,12 +114,12 @@ export default function CrudGeneratorPage() {
         <Button className="w-full" onClick={handleGenerate}>
           Generate Code
         </Button>
-
-
-        <GeneratedCodePreview title="Model Code" code={modelCode} />
+         <GeneratedCodePreview title="Bash Command" code={bashCode} />
         <GeneratedCodePreview title="Migration Code" code={migrationCode} />
+        <GeneratedCodePreview title="Model Code" code={modelCode} />
         <GeneratedCodePreview title="Controller Code" code={controllerCode} />
         <GeneratedCodePreview title="Routes Code" code={routesCode} />
+        <h1>wip request</h1>
       </CardContent>
     </Card>
   )
