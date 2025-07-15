@@ -1,47 +1,34 @@
-import React from "react"
-import ModelInputForm, { type FormData } from "@/components/ModelInputForm"
-import ModelGenerator from "@/components/ModelGenerator"
-import { generateControllerCode } from "@/utils/generators"
-import Navbar from "@/components/Navbar"
-import Footer from "@/components/Footer"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MainPage from "./pages/MainPage";
+import { Toaster } from "sonner";
 
 function App() {
-  const [modelCode, setModelCode] = React.useState("")
-  const [controllerCode, setControllerCode] = React.useState("")
+  return (
+    <BrowserRouter>
+      <Routes>
 
-  const handleModelSubmit = (data: FormData) => {
-    setModelCode(data.generatedCode)
-    const controller = generateControllerCode(data.modelName)
-    setControllerCode(controller)
-  }
+        <Route path="/" element={<MainPage />} />
+        {/* <Route path="*" element={<NotFound />} /> */}
+      </Routes>
 
-  return (<>
-          <Navbar />
-    <main className="min-h-screen bg-gray-50 p-6">
-  
-      <h1 className="text-3xl font-bold text-center mb-6">
-        Laravel CRUD Generator
-      </h1>
+      {/* <Chatbot /> */}
 
-      <ModelInputForm onSubmit={handleModelSubmit} />
-
-      {modelCode && (
-        <>
-        
-          <ModelGenerator code={modelCode} />
-        </>
-      )}
-
-      {controllerCode && (
-        <>
-        
-          <ModelGenerator code={controllerCode} />
-        </>
-      )}
-    </main>
-    <Footer></Footer>
-  </>
-  )
+   
+      <Toaster
+        position="bottom-right"
+        theme="light" // "light" makes it black on white by default
+        closeButton
+        toastOptions={{
+          style: {
+            background: "#fff",
+            color: "#000",
+            border: "1px solid #000",
+            fontSize: "14px",
+          },
+        }}
+      />
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
