@@ -15,6 +15,8 @@ import generateApiRoutes from "../utils/generators/routes/api"
 import generateMigration from "../utils/generators/migration"
 import generateBashApi from "../utils/generators/bashApi"
 import generateBash from "@/utils/generators/bash"
+import generateStoreRequest from "@/utils/generators/storerequest"
+import generateUpdateRequest from "@/utils/generators/updaterequest"
 import { toast } from "sonner"
 
 export default function CrudGeneratorPage() {
@@ -27,6 +29,8 @@ export default function CrudGeneratorPage() {
   const [routesCode, setRoutesCode] = useState("")
   const [migrationCode, setMigrationCode] = useState("")
   const [bashCode, setBashCode] = useState("")
+  const [storeRequestCode, setStoreRequestCode] = useState("")
+  const [updateRequestCode, setUpdateRequestCode] = useState("")
 
   const handleChange = (i: number, key: keyof Field, val: string) => {
     const updated = [...fields]
@@ -43,7 +47,8 @@ export default function CrudGeneratorPage() {
     const cleanFields = fields.filter((f) => f.name.trim() !== "")
     setModelCode(generateModel(modelName, cleanFields))
     setMigrationCode(generateMigration(modelName, cleanFields))
-
+    setStoreRequestCode(generateStoreRequest(modelName, cleanFields))
+    setUpdateRequestCode(generateUpdateRequest(modelName, cleanFields))
     switch (controllerType) {
       case "inertia":
         setControllerCode(generateInertia(modelName))
@@ -71,6 +76,7 @@ export default function CrudGeneratorPage() {
   }
 
   return (
+  <div>
     <Card className="w-full max-w-3xl mx-auto mt-10 p-6 bg-white">
       <CardContent className="space-y-6">
         <div>
@@ -114,13 +120,20 @@ export default function CrudGeneratorPage() {
         <Button className="w-full" onClick={handleGenerate}>
           Generate Code
         </Button>
-         <GeneratedCodePreview title="Bash Command" code={bashCode} />
-        <GeneratedCodePreview title="Migration Code" code={migrationCode} />
-        <GeneratedCodePreview title="Model Code" code={modelCode} />
-        <GeneratedCodePreview title="Controller Code" code={controllerCode} />
-        <GeneratedCodePreview title="Routes Code" code={routesCode} />
-        <h1>wip request</h1>
+        
+        <h1>wip</h1>
       </CardContent>
+
+      <GeneratedCodePreview title="Bash Command" code={bashCode} />
+      <GeneratedCodePreview title="Migration Code" code={migrationCode} />
+      <GeneratedCodePreview title="Model Code" code={modelCode} />
+      <GeneratedCodePreview title="Store Request Code" code={storeRequestCode} />
+      <GeneratedCodePreview title="Update Request Code" code={updateRequestCode} />
+      <GeneratedCodePreview title="Controller Code" code={controllerCode} />
+      <GeneratedCodePreview title="Routes Code" code={routesCode} />
+
     </Card>
+       
+  </div>
   )
 }
